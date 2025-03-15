@@ -43,7 +43,7 @@ let playerBullets = [];
 const damageParticles = [];
 
 let playerBulletCooldown = 40;
-let enemyBulletCooldown = 10;
+let enemyBulletCooldown = 30;
 
 function update() {
     let isAnyHovered = false;
@@ -91,7 +91,7 @@ function update() {
     }
 
     if (enemyBulletCooldown === 0 && enemyHealth > 0) {
-        enemyBulletCooldown = 10;
+        enemyBulletCooldown = 30;
         const diffX = player.x - 64;
         const diffY = player.y - 64;
 
@@ -392,7 +392,7 @@ function startGame() {
     isDead = false;
     enemyHealth = 20;
     playerBulletCooldown = 40;
-    enemyBulletCooldown = 10;
+    enemyBulletCooldown = 30;
 
     start = Date.now();
 
