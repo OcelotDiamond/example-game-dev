@@ -135,7 +135,7 @@ function update() {
         enemyBullets[i].x += enemyBullets[i].dx;
         enemyBullets[i].y += enemyBullets[i].dy;
 
-        if (circleCheck(player.x, player.y, 1, enemyBullets[i].x, enemyBullets[i].y, 1)) {
+        if (circleCheck(player.x, player.y, 2, enemyBullets[i].x, enemyBullets[i].y, 1)) {
             isDead = true;
             return;
         }
