@@ -389,6 +389,7 @@ function titleScreen() {
     ctx.fillStyle = '#edb1ed';
     drawText(ctx, 64, 64, 'Gravity Swinger', 10);
     drawText(ctx, 64, 80, 'Press Space to Start', 5);
+    drawText(ctx, 64, 90, 'Hold mouse down on the gravity anchors to move', 3);
 }
 
 titleScreen();
