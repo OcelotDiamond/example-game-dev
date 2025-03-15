@@ -206,6 +206,8 @@ function draw() {
         ctx.fillStyle = '#9e1e2f';
         ctx.fillRect(0, 0, canvas.width, canvas.height);
         
+        ctx.globalAlpha = 1;
+        ctx.fillStyle = '#ffffff';
         drawText(ctx, 64, 64, 'You Died', 10);
         drawText(ctx, 64, 80, 'Press Space to Restart', 5);
 
