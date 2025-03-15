@@ -252,7 +252,20 @@ function draw() {
 }
 
 function drawEnemy(x, y) {
+    const diffX = player.x - 64;
+    const diffY = player.y - 64;
+
+    const angle = Math.atan2(diffY, diffX) - Math.PI * 0.5;
+
     const enemyPoly = [[0, 3], [-2, -2], [0, -1], [2, -2]];
+
+    for (let i = 0; i < enemyPoly.length; i++) {
+        const x = enemyPoly[i][0];
+        const y = enemyPoly[i][1];
+
+        enemyPoly[i][0] = x * Math.cos(angle) - y * Math.sin(angle);
+        enemyPoly[i][1] = x * Math.sin(angle) + y * Math.cos(angle);
+    }
 
     for (let i = 0; i < enemyPoly.length; i++) {
         enemyPoly[i][0] *= 3;
