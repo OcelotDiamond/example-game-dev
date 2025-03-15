@@ -199,8 +199,11 @@ function draw() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
     if (enemyHealth === 0) {
+        ctx.shadowColor = '#edb1ed';
+        ctx.shadowBlur = displayMultiplier * 3;
         drawText(ctx, 64, 64, 'You Win!', 10);
         drawText(ctx, 64, 80, 'Press Space to Restart', 5);
+        ctx.shadowBlur = 0;
     } else if (isDead) {
         ctx.globalAlpha = 0.5;
         ctx.fillStyle = '#9e1e2f';
@@ -208,8 +211,11 @@ function draw() {
         
         ctx.globalAlpha = 1;
         ctx.fillStyle = '#ffffff';
+        ctx.shadowColor = '#ffffff';
+        ctx.shadowBlur = displayMultiplier * 3;
         drawText(ctx, 64, 64, 'You Died', 10);
         drawText(ctx, 64, 80, 'Press Space to Restart', 5);
+        ctx.shadowBlur = 0;
 
         document.querySelector(':root').style.setProperty('--bg', '#5f1132');
         return;
@@ -230,7 +236,10 @@ function draw() {
             const angle = damageParticles[i].rot + n * Math.PI * 2 / 3;
             poly.push([Math.cos(angle), Math.sin(angle)]);
         }
+        ctx.shadowColor = '#edb1ed';
+        ctx.shadowBlur = displayMultiplier * 3;
         drawPoly(ctx, damageParticles[i].x, damageParticles[i].y, poly);
+        ctx.shadowBlur = 0;
     }
 
     drawPlayer(player.x, player.y);
@@ -249,21 +258,30 @@ function drawEnemy(x, y) {
         enemyPoly[i][0] *= 3;
         enemyPoly[i][1] *= 3;
     }
-
+    
+    ctx.shadowColor = '#edb1ed';
+    ctx.shadowBlur = displayMultiplier * 3;
     ctx.fillStyle = '#ffffff';
     drawPoly(ctx, x, y, enemyPoly);
+    ctx.shadowBlur = 0;
 }
 
 function drawBullets() {
+    ctx.shadowColor = '#ff3033';
+    ctx.shadowBlur = displayMultiplier * 2;
+    ctx.fillStyle = '#ff3033';
     for (let i = 0; i < enemyBullets.length; i++) {
-        ctx.fillStyle = '#ff3033';
         drawCircle(ctx, enemyBullets[i].x, enemyBullets[i].y, 1);
     }
 
+    
+    ctx.shadowColor = '#71bde1';
+    ctx.shadowBlur = displayMultiplier * 2;
+    ctx.fillStyle = '#71bde1';
     for (let i = 0; i < playerBullets.length; i++) {
-        ctx.fillStyle = '#71bde1';
         drawCircle(ctx, playerBullets[i].x, playerBullets[i].y, 0.5);
     }
+    ctx.shadowBlur = 0;
 }
 
 function drawPlayer(x, y) {
@@ -298,7 +316,10 @@ function drawPlayer(x, y) {
         playerPoly[i][1] = x * Math.sin(angle) + y * Math.cos(angle);
     }
     ctx.fillStyle = '#ffffff';
+    ctx.shadowColor = '#edb1ed';
+    ctx.shadowBlur = displayMultiplier * 3;
     drawPoly(ctx, x, y, playerPoly);
+    ctx.shadowBlur = 0;
 }
 
 function drawStar(x, y, angle, first) {
@@ -307,8 +328,11 @@ function drawStar(x, y, angle, first) {
     const arr = [[7*scale, 0], [0, 3*scale], [-7*scale, 0], [0, -3*scale]];
 
     if (first) {
+        ctx.shadowBlur = displayMultiplier * 3;
+        ctx.shadowColor = '#411f77';
         ctx.fillStyle = '#411f77';
     } else {
+        ctx.shadowBlur = 0;
         ctx.fillStyle = '#64329a';
     }
     drawPoly(ctx, x, y, arr);
@@ -334,6 +358,8 @@ function drawHookPoint(x, y, hoverTime) {
 
     if (hoverTime > 0) {
         ctx.strokeStyle = '#ef86ef';
+        ctx.shadowColor = '#ef86ef';
+        ctx.shadowBlur = displayMultiplier * 3;
         ctx.beginPath();
         ctx.arc(
             x * displayMultiplier,
@@ -343,6 +369,7 @@ function drawHookPoint(x, y, hoverTime) {
         ctx.closePath();
         ctx.setLineDash([10, 6, 6, 6]);
         ctx.stroke();
+        ctx.shadowBlur = 0;
     }
 }
 
@@ -353,6 +380,8 @@ function startGame() {
     enemyHealth = 20;
     playerBulletCooldown = 40;
     enemyBulletCooldown = 30;
+
+    start = Date.now();
 
     playerBullets = [];
     enemyBullets = [];
@@ -389,9 +418,12 @@ function titleScreen() {
     }
 
     ctx.fillStyle = '#edb1ed';
+    ctx.shadowColor = '#edb1ed';
+    ctx.shadowBlur = displayMultiplier * 3;
     drawText(ctx, 64, 64, 'Gravity Swinger', 10);
     drawText(ctx, 64, 80, 'Press Space to Start', 5);
     drawText(ctx, 64, 90, 'Hold mouse down on the gravity anchors to move', 3);
+    ctx.shadowBlur = 0;
 }
 
 titleScreen();
