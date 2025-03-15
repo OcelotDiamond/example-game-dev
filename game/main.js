@@ -199,7 +199,7 @@ function draw() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
     if (enemyHealth === 0) {
-        ctx.shadowColor = '#edb1ed';
+        ctx.shadowColor = '#71bde1';
         ctx.shadowBlur = displayMultiplier * 3;
         drawText(ctx, 64, 64, 'You Win!', 10);
         drawText(ctx, 64, 80, 'Press Space to Restart', 5);
